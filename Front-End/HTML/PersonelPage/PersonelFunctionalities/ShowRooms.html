@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../../CSS/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <title>Rooms</title>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1>Rooms</h1>
+      <table id="roomsTable" class="table table-striped">
+        <thead>
+          <tr>
+            <th>Room Number</th>
+            <th>Location</th>
+            <th>Name</th>
+            <th>Lighting Condition</th>
+            <th>Air Conditioning System</th>
+            <th>Height</th>
+            <th>Width</th>
+            <th>Length</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <script>
+      // Fetch rooms and fill the table
+      window.onload = function () {
+        fetch("http://localhost:3001/api/rooms")
+          .then((response) => response.json())
+          .then((rooms) => {
+            const tableBody = document
+              .getElementById("roomsTable")
+              .getElementsByTagName("tbody")[0];
+
+            rooms.forEach((room) => {
+              const newRow = tableBody.insertRow();
+
+              const roomNumberCell = newRow.insertCell();
+              const locationCell = newRow.insertCell();
+              const nameCell = newRow.insertCell();
+              const lightingConditionCell = newRow.insertCell();
+              const airConditioningSystemCell = newRow.insertCell();
+              const heightCell = newRow.insertCell();
+              const widthCell = newRow.insertCell();
+              const lengthCell = newRow.insertCell();
+
+              roomNumberCell.textContent = room.roomNumber;
+              locationCell.textContent = room.location;
+              nameCell.textContent = room.name;
+              lightingConditionCell.textContent = room.lightingCondition;
+              airConditioningSystemCell.textContent =
+                room.airConditioningSystem;
+              heightCell.textContent = room.height;
+              widthCell.textContent = room.width;
+              lengthCell.textContent = room.length;
+            });
+          });
+      };
+    </script>
+  </body>
+</html>

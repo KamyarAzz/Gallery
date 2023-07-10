@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../../CSS/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <title>Exhibitions</title>
+    <style>
+      body {
+        direction: rtl;
+      }
+      .exhibition {
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1>نمایشگاه ها</h1>
+      <table class="table table-striped mt-3" style="direction: rtl">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Exhibition ID</th>
+            <th>Employee ID</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Description</th>
+            <th>Visitors</th>
+            <th>Number Of Tickets</th>
+          </tr>
+        </thead>
+        <tbody id="exhibitions"></tbody>
+      </table>
+    </div>
+
+    <script>
+      window.onload = function () {
+        let exhibitionsTbody = document.getElementById("exhibitions");
+        fetch("http://localhost:3001/api/exhibitions")
+          .then((response) => response.json())
+          .then((data) => {
+            data.forEach((exhibition) => {
+              let tr = document.createElement("tr");
+              tr.innerHTML = `
+                        <td>${exhibition.name}</td>
+                        <td>${exhibition.exhibitionId}</td>
+                        <td>${exhibition.workerId}</td>
+                        <td>${
+                          exhibition.startDate
+                            ? exhibition.startDate
+                            : "Not Specified"
+                        }</td>
+                        <td>${
+                          exhibition.endDate
+                            ? exhibition.endDate
+                            : "Not Specified"
+                        }</td>
+                        <td>${
+                          exhibition.description
+                            ? exhibition.description
+                            : "Not Specified"
+                        }</td>
+                        <td>${
+                          exhibition.visitorAttended
+                            ? exhibition.visitorAttended
+                            : "Not Specified"
+                        }</td>
+                        <td>${
+                          exhibition.numberOfTickets
+                            ? exhibition.numberOfTickets
+                            : "Not Specified"
+                        }</td>
+                    `;
+              // Add the new tr to the exhibitionsTbody
+              exhibitionsTbody.appendChild(tr);
+            });
+          })
+          .catch((error) => console.error("Error:", error));
+      };
+    </script>
+  </body>
+</html>

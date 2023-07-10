@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../../CSS/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <title>Workers</title>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1>Personel</h1>
+      <table id="workersTable" class="table table-striped">
+        <thead>
+          <tr>
+            <th>Employee ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Address</th>
+            <th>Position</th>
+            <th>Employment Status</th>
+            <th>Employment Date</th>
+            <th>Email</th>
+            <th>Birthdate</th>
+            <th>Education</th>
+            <th>Salary</th>
+            <th>National ID</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <script>
+      // Fetch workers and fill the table
+      window.onload = function () {
+        fetch("http://localhost:3001/api/workers")
+          .then((response) => response.json())
+          .then((workers) => {
+            const tableBody = document
+              .getElementById("workersTable")
+              .getElementsByTagName("tbody")[0];
+
+            workers.forEach((worker) => {
+              const newRow = tableBody.insertRow();
+
+              const workerIdCell = newRow.insertCell();
+              const firstnameCell = newRow.insertCell();
+              const lastnameCell = newRow.insertCell();
+              const addressCell = newRow.insertCell();
+              const positionCell = newRow.insertCell();
+              const employmentStatusCell = newRow.insertCell();
+              const employmentDateCell = newRow.insertCell();
+              const emailCell = newRow.insertCell();
+              const birthDateCell = newRow.insertCell();
+              const educationCell = newRow.insertCell();
+              const salaryCell = newRow.insertCell();
+              const nationalIdCell = newRow.insertCell();
+
+              workerIdCell.textContent = worker.workerId;
+              firstnameCell.textContent = worker.firstname;
+              lastnameCell.textContent = worker.lastname;
+              addressCell.textContent = worker.address;
+              positionCell.textContent = worker.position;
+              employmentStatusCell.textContent = worker.employmentStatus;
+              employmentDateCell.textContent = worker.employmentDate;
+              emailCell.textContent = worker.email;
+              birthDateCell.textContent = worker.birthDate;
+              educationCell.textContent = worker.education;
+              salaryCell.textContent = worker.salary;
+              nationalIdCell.textContent = worker.nationalId;
+            });
+          });
+      };
+    </script>
+  </body>
+</html>

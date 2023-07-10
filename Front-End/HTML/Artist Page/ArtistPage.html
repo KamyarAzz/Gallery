@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="art,artist,gallery,visitor,personel" />
+    <meta
+      name="describtion"
+      content="A place for artists to share their creative ideas with others!"
+    />
+    <link rel="stylesheet" href="../../CSS/ArtistPage.css" />
+    <title>Artist Page</title>
+  </head>
+  <body>
+    <a href="../index.html">< Return</a>
+    <div id="profile">
+      <h1 id="profileHeader">Profile</h1>
+      <p>First Name :</p>
+      <p class="data" id="fnameData"></p>
+      <br />
+      <p>Last Name :</p>
+      <p class="data" id="lnameData"></p>
+      <br />
+      <p>Country :</p>
+      <p class="data" id="countryData"></p>
+      <br />
+      <p>City :</p>
+      <p class="data" id="cityData"></p>
+      <br />
+      <p>Address :</p>
+      <p class="data" id="addData"></p>
+      <br />
+      <p>Biography :</p>
+      <p class="data" id="bioData"></p>
+      <br />
+      <p>Commision Percentage :</p>
+      <p class="data" id="commData"></p>
+      <br />
+    </div>
+    <div id="artworks"></div>
+    <form action="">
+      <h1>Submit Artwork</h1>
+      <br /><br />
+      <label for="artName">Artwork Name</label>
+      <input name="artName" id="artName" type="text" />
+      <p class="danger">*</p>
+      <div class="danger" id="nameErr"></div>
+      <br /><br />
+      <label for="height">Height</label>
+      <input name="height" id="height" type="text" />
+      <p class="danger">*</p>
+      <div class="danger" id="hErr"></div>
+      <br /><br />
+      <label for="length">Length</label>
+      <input name="length" id="length" type="text" />
+      <p class="danger">*</p>
+      <div class="danger" id="lErr"></div>
+      <br /><br />
+      <label for="width">Width</label>
+      <input name="width" id="width" type="text" />
+      <p class="danger">*</p>
+      <div class="danger" id="wErr"></div>
+      <br /><br />
+      <label for="desc">Description</label>
+      <input name="desc" id="desc" type="text" />
+      <br /><br /><br />
+      <label for="creationDate">Creation Date</label>
+      <input name="creationDate" id="creationDate" type="date" />
+      <br /><br /><br />
+      <button id="submit-1" type="button">Submit</button>
+      <br /><br /><br />
+    </form>
+    <form action="">
+      <h1>Edit Profile</h1>
+      <br /><br />
+      <label for="newcountry">Country</label>
+      <input name="newcountry" id="newcountry" type="text" />
+      <br /><br />
+      <label for="newcity">City</label>
+      <input name="newcity" id="newcity" type="text" />
+      <br /><br />
+      <label for="newAdd">Address</label>
+      <input name="newAdd" id="newAdd" type="text" />
+      <br /><br />
+      <label for="newbio">Biography</label>
+      <input name="newbio" id="newbio" type="text" />
+      <br /><br /><br />
+      <button id="submit-2" type="button">Edit</button>
+      <div class="danger" id="error2"></div>
+      <br /><br /><br />
+    </form>
+    <script src="../../JavaScript/ArtistPage.js"></script>
+  </body>
+</html>

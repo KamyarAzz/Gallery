@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="art,artist,gallery,visitor,personel" />
+    <meta
+      name="describtion"
+      content="A place for artists to share their creative ideas with others!"
+    />
+    <link rel="stylesheet" href="../../CSS/PersonelPage.css" />
+    <title>Personel Dashboard</title>
+  </head>
+  <body>
+    <a href="../index.html">< Return</a>
+    <div class="worker-details">
+      <h2>Employee Profile</h2>
+      <br />
+      <p id="workerId">PersonelID :</p>
+      <p id="firstName">First Name :</p>
+      <p id="lastName">Last Name :</p>
+      <p id="position">Role :</p>
+    </div>
+    <div class="dashboard">
+      <button id="show-exhibitions">Exhibitions</button>
+      <button id="add-exhibition">Add Exhibition</button>
+      <button id="show-partnerships">Partnerships</button>
+      <button id="add-partnership">Add Partnership</button>
+      <button id="show-sales">Sales</button>
+      <button id="add-sale">Add Sale</button>
+      <button id="show-artworLoans">Artwork Loans</button>
+      <button id="add-artworLoan">Add Artwork Loan</button>
+      <button id="show-rooms">Rooms</button>
+      <button id="add-room">Add Room</button>
+      <button id="show-workers">Employees</button>
+      <button id="add-worker">Add Employee</button>
+    </div>
+    <script>
+      let user = JSON.parse(localStorage.getItem("user"));
+
+      if (user) {
+        // Display user details
+        document.getElementById("workerId").innerText += user.workerId;
+        document.getElementById("firstName").innerText += user.firstname;
+        document.getElementById("lastName").innerText += user.lastname;
+        document.getElementById("position").innerText += user.position;
+      } else {
+        console.log("No user found in local storage");
+      }
+      // Add event listeners to the buttons
+      document
+        .getElementById("show-exhibitions")
+        .addEventListener("click", () => {
+          window.location.href =
+            "./PersonelFunctionalities/ShowExhibitions.html";
+        });
+
+      document
+        .getElementById("add-exhibition")
+        .addEventListener("click", () => {
+          window.location.href =
+            "./PersonelFunctionalities/CreateExhibition.html";
+        });
+
+      document
+        .getElementById("show-partnerships")
+        .addEventListener("click", () => {
+          window.location.href =
+            "./PersonelFunctionalities/ShowPartnerships.html";
+        });
+
+      document
+        .getElementById("add-partnership")
+        .addEventListener("click", () => {
+          window.location.href =
+            "./PersonelFunctionalities/CreatePartnership.html";
+        });
+
+      document.getElementById("add-sale").addEventListener("click", () => {
+        window.location.href = "./PersonelFunctionalities/CreateSale.html";
+      });
+
+      document.getElementById("show-sales").addEventListener("click", () => {
+        window.location.href = "./PersonelFunctionalities/ShowSales.html";
+      });
+
+      document
+        .getElementById("add-artworLoan")
+        .addEventListener("click", () => {
+          window.location.href =
+            "./PersonelFunctionalities/CreateArtworkLoan.html";
+        });
+
+      document
+        .getElementById("show-artworLoans")
+        .addEventListener("click", () => {
+          window.location.href =
+            "./PersonelFunctionalities/ShowArtworkLoans.html";
+        });
+
+      document.getElementById("add-room").addEventListener("click", () => {
+        window.location.href = "./PersonelFunctionalities/CreateRoom.html";
+      });
+
+      document.getElementById("show-rooms").addEventListener("click", () => {
+        window.location.href = "./PersonelFunctionalities/ShowRooms.html";
+      });
+
+      document.getElementById("add-worker").addEventListener("click", () => {
+        window.location.href = "./PersonelFunctionalities/CreateWorker.html";
+      });
+
+      document.getElementById("show-workers").addEventListener("click", () => {
+        window.location.href = "./PersonelFunctionalities/ShowWorkers.html";
+      });
+    </script>
+  </body>
+</html>

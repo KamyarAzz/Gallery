@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Exhibition</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+      }
+
+      #create-exhibition-form {
+        width: 500px;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+      }
+
+      label {
+        font-weight: bold;
+        margin-top: 10px;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      input[type="submit"] {
+        background-color: #4caf50;
+        color: white;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="create-exhibition-form">
+      <label for="name">Exhibition Name :</label><br />
+      <input type="text" id="name" name="name" required /><br />
+      <label for="startDate">Start Date :</label><br />
+      <input type="date" id="startDate" name="startDate" /><br />
+      <label for="endDate">End Date :</label><br />
+      <input type="date" id="endDate" name="endDate" /><br />
+      <label for="description">Description :</label><br />
+      <textarea id="description" name="description"></textarea><br />
+      <label for="numberOfTickets">Number Of Tickets :</label><br />
+      <input type="number" id="numberOfTickets" name="numberOfTickets" /><br />
+      <input type="submit" value="submit" />
+    </form>
+
+    <script>
+      document
+        .getElementById("create-exhibition-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          var workerId = JSON.parse(localStorage.getItem("user")).workerId;
+          var name = document.getElementById("name").value;
+          var startDate = document.getElementById("startDate").value;
+          var endDate = document.getElementById("endDate").value;
+          var description = document.getElementById("description").value;
+          var numberOfTickets =
+            document.getElementById("numberOfTickets").value;
+
+          var data = {
+            workerId: workerId,
+            name: name,
+            startDate: startDate ? startDate : null,
+            endDate: endDate ? endDate : null,
+            description: description ? description : null,
+            numberOfTickets: numberOfTickets ? numberOfTickets : null,
+          };
+
+          fetch("http://localhost:3001/api/exhibitions", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          })
+            .then((response) => response.json())
+            .then((data) => alert("Exhibition created successfully"))
+            .catch((error) => {
+              console.error("Error:", error);
+              alert("Failed to create exhibition");
+            });
+        });
+    </script>
+  </body>
+</html>

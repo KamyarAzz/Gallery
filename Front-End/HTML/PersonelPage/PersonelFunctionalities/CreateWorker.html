@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../../CSS/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <title>Create Worker</title>
+    <style>
+      body {
+        overflow-y: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1>Create Employee</h1>
+      <form id="createWorkerForm">
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" id="firstname" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label>Last Name </label>
+          <input type="text" id="lastname" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label>Address</label>
+          <input type="text" id="address" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label>Position</label>
+          <input type="text" id="position" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label>Employment Status</label>
+          <input type="text" id="employmentStatus" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label>Employment Date</label>
+          <input type="date" id="employmentDate" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label>Email (Optional)</label>
+          <input type="email" id="email" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label>Birthdate</label>
+          <input type="date" id="birthDate" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label>Education (Optional)</label>
+          <input type="text" id="education" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label>Salary</label>
+          <input type="number" id="salary" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label>NationalID</label>
+          <input type="text" id="nationalId" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+
+    <script>
+      document
+        .getElementById("createWorkerForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const worker = {
+            firstname: document.getElementById("firstname").value,
+            lastname: document.getElementById("lastname").value,
+            address: document.getElementById("address").value,
+            position: document.getElementById("position").value,
+            employmentStatus: document.getElementById("employmentStatus").value,
+            employmentDate: document.getElementById("employmentDate").value,
+            email: document.getElementById("email").value,
+            birthDate: document.getElementById("birthDate").value,
+            education: document.getElementById("education").value,
+            salary: document.getElementById("salary").value,
+            nationalId: document.getElementById("nationalId").value,
+          };
+
+          fetch("http://localhost:3001/api/workers", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(worker),
+          })
+            .then((response) => response.json())
+            .then((data) => console.log(data))
+            .catch((error) => console.error("Error:", error));
+        });
+    </script>
+  </body>
+</html>

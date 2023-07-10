@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../../CSS/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <title>Artwork Loan Creation</title>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1>Create Artwork Loan</h1>
+      <form id="artworkLoanForm">
+        <div class="form-group">
+          <label for="artwork">Artwork</label>
+          <select id="artwork" class="form-control"></select>
+        </div>
+        <div class="form-group">
+          <label for="partnership">Partnership</label>
+          <select id="partnership" class="form-control"></select>
+        </div>
+        <div class="form-group">
+          <label for="status">Atatus</label>
+          <input type="text" id="status" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="startDate">Start Date</label>
+          <input type="date" id="startDate" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="endDate">End Date</label>
+          <input type="date" id="endDate" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="conditions">Conditions</label>
+          <textarea id="conditions" class="form-control" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+      </form>
+    </div>
+    <script>
+      // Fill the artwork and partnership selects
+      window.onload = function () {
+        const artworkSelect = document.getElementById("artwork");
+        const partnershipSelect = document.getElementById("partnership");
+
+        // Fetch artworks
+        fetch("http://localhost:3001/api/artworks")
+          .then((response) => response.json())
+          .then((artworks) => {
+            artworks.forEach((artwork) => {
+              const option = document.createElement("option");
+              option.value = artwork.artworkId;
+              option.text = artwork.artworkName;
+              artworkSelect.appendChild(option);
+            });
+          });
+
+        // Fetch partnerships
+        fetch("http://localhost:3001/api/partnerships")
+          .then((response) => response.json())
+          .then((partnerships) => {
+            partnerships.forEach((partnership) => {
+              const option = document.createElement("option");
+              option.value = partnership.partnershipId;
+              option.text = partnership.name;
+              partnershipSelect.appendChild(option);
+            });
+          });
+      };
+
+      // Handle form submission
+      document
+        .getElementById("artworkLoanForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const workerId = JSON.parse(localStorage.getItem("user"))["workerId"];
+          if (!workerId) {
+            alert("Employee Unknown!");
+            return;
+          }
+
+          const artworkId = document.getElementById("artwork").value;
+          const partnershipId = document.getElementById("partnership").value;
+          const status = document.getElementById("status").value;
+          const startDate = document.getElementById("startDate").value;
+          const endDate = document.getElementById("endDate").value;
+          const conditions = document.getElementById("conditions").value;
+
+          const payload = {
+            artworkId,
+            partnershipId,
+            workerId,
+            status,
+            startDate,
+            endDate,
+            conditions,
+          };
+
+          // Send the request
+          fetch("http://localhost:3001/api/artworkLoans", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              // You can handle the response here
+              alert("Artwork Loan Successfully Created!");
+            })
+            .catch((error) => console.error("Error:", error));
+        });
+    </script>
+  </body>
+</html>

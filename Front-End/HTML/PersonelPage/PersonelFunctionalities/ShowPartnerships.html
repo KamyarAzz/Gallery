@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../../CSS/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <title>Partnerships</title>
+    <style>
+      .partnership {
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1>Partnerships</h1>
+      <table class="table table-striped mt-3" style="direction: rtl">
+        <thead>
+          <tr>
+            <th>Partnership ID</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Contact Person</th>
+            <th>Email</th>
+            <th>Phonenumber</th>
+            <th>Address</th>
+          </tr>
+        </thead>
+        <tbody id="partnerships"></tbody>
+      </table>
+    </div>
+
+    <script>
+      window.onload = function () {
+        let partnershipsTbody = document.getElementById("partnerships");
+        fetch("http://localhost:3001/api/partnerships")
+          .then((response) => response.json())
+          .then((data) => {
+            data.forEach((partnership) => {
+              let tr = document.createElement("tr");
+              tr.innerHTML = `
+                        <td>${partnership.partnershipId}</td>
+                        <td>${partnership.name}</td>
+                        <td>${partnership.type}</td>
+                        <td>${
+                          partnership.startDate
+                            ? partnership.startDate
+                            : "Not Specified!"
+                        }</td>
+                        <td>${
+                          partnership.endDate
+                            ? partnership.endDate
+                            : "Not Specified!"
+                        }</td>
+                        <td>${
+                          partnership.contactPerson
+                            ? partnership.contactPerson
+                            : "Not Specified!"
+                        }</td>
+                        <td>${
+                          partnership.email
+                            ? partnership.email
+                            : "Not Specified!"
+                        }</td>
+                        <td>${
+                          partnership.phoneNumber
+                            ? partnership.phoneNumber
+                            : "Not Specified!"
+                        }</td>
+                        <td>${
+                          partnership.address
+                            ? partnership.address
+                            : "Not Specified!"
+                        }</td>
+                    `;
+              // Add the new tr to the partnershipsTbody
+              partnershipsTbody.appendChild(tr);
+            });
+          })
+          .catch((error) => console.error("Error:", error));
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../../CSS/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <title>Sales</title>
+    <style>
+      .sale {
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1>Sales</h1>
+      <table class="table table-striped mt-3" style="direction: rtl">
+        <thead>
+          <tr>
+            <th>Artwork ID</th>
+            <th>Employee ID</th>
+            <th>National ID</th>
+            <th>Price</th>
+            <th>Date</th>
+            <th>Payment Method</th>
+            <th>Artist Commision</th>
+          </tr>
+        </thead>
+        <tbody id="sales"></tbody>
+      </table>
+    </div>
+
+    <script>
+      window.onload = function () {
+        let salesTbody = document.getElementById("sales");
+        fetch("http://localhost:3001/api/sales")
+          .then((response) => response.json())
+          .then((data) => {
+            data.forEach((sale) => {
+              let tr = document.createElement("tr");
+              tr.innerHTML = `
+                        <td>${sale.artworkId}</td>
+                        <td>${sale.workerId}</td>
+                        <td>${sale.nationalCode}</td>
+                        <td>${sale.price}</td>
+                        <td>${
+                          sale.date
+                            ? new Date(sale.date).toLocaleString("fa-IR")
+                            : "Not Specified!"
+                        }</td>
+                        <td>${
+                          sale.paymentMethod
+                            ? sale.paymentMethod
+                            : "Not Specified!"
+                        }</td>
+                        <td>${
+                          sale.artistCommision
+                            ? sale.artistCommision
+                            : "Not Specified!"
+                        }</td>
+                    `;
+              // Add the new tr to the salesTbody
+              salesTbody.appendChild(tr);
+            });
+          })
+          .catch((error) => console.error("Error:", error));
+      };
+    </script>
+  </body>
+</html>

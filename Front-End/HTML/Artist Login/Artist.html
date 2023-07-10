@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="art,artist,gallery,visitor,personel" />
+    <meta
+      name="describtion"
+      content="A place for artists to share their creative ideas with others!"
+    />
+    <link rel="stylesheet" href="../../CSS/ArtistLogin.css" />
+    <title>Artist Login</title>
+  </head>
+  <body>
+    <form action="">
+      <a href="../index.html">< Return</a>
+      <h1>Artist Login</h1>
+      <br />
+      <label for="firstname">Username</label>
+      <input type="text" name="firstname" id="firstname" placeholder="Name" />
+      <div class="danger" id="userErr"></div>
+      <br />
+      <label for="artistId">Password</label>
+      <input
+        type="password"
+        name="artistId"
+        id="artistId"
+        placeholder="ArtistID"
+      />
+      <div class="danger" id="passErr"></div>
+      <br /><br /><br />
+      <button id="submit" type="button">Login</button>
+    </form>
+    <script src="../../JavaScript/Artistlogin.js"></script>
+  </body>
+</html>
